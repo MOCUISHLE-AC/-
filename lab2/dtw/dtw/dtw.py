@@ -139,6 +139,8 @@ def draw(s1,s2,name1,name2,png_name):
             DTW[(i, j)] = dist[i][j] + min(DTW[(i - 1, j)], DTW[(i, j - 1)], DTW[(i - 1, j - 1)])
     index_x=len1-1
     index_y=len2-1
+    x.append(index_x)
+    y.append(index_y)
     while(index_x!=0|index_y!=0):
         if min(DTW[(index_x - 1, index_y)], DTW[(index_x, index_y - 1)], DTW[(index_x - 1, index_y - 1)]) == DTW[(index_x - 1, index_y)]:
             x.append(index_x - 1)
