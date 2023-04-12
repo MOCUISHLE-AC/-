@@ -1,2 +1,3 @@
-# -
-南开大学大三下语音处理lab
+# Speech_processing
+
+NKU大三下语音处理lab
