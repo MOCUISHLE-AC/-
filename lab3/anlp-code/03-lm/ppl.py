@@ -36,7 +36,7 @@ class FNN_LM(nn.Module):
 
     return logit
 
-model = torch.load('model_epoch25.pt')
+model = torch.load('model0.pt')
 print(model)
 #Todo::根据上文前两个词预测后文
 N = 2 # The length of the n-gram
@@ -106,7 +106,10 @@ def calc_sent_loss(sent):
     hist = hist[1:] + [next_word]
 
   logits = calc_score_of_histories(all_histories)
-  loss = nn.functional.cross_entropy(logits, convert_to_variable(all_targets), size_average=False)
+  print("logits")
+  print(logits)
+  print(convert_to_variable(all_targets))
+  loss =nn.functional.cross_entropy(logits,convert_to_variable(all_targets),size_average=False)
 
   return loss
 
@@ -129,9 +132,11 @@ def generate_sent():
 last_dev = 1e20
 best_dev = 1e20
 
-
 mytest = list(read_dataset("../data/ptb-text/mytest.txt", add_vocab=False))
 model.eval()
 for send_id, sent in enumerate(mytest):
-    loss = calc_sent_loss(sent)
-    print("id=%d loss=%f ppl=%f"%(send_id,loss.data, math.exp(loss.data/len(sent))))
+    myloss = calc_sent_loss(sent)
+    print(myloss)
+    print("id=%d loss=%f ppl=%f"%(send_id,myloss.data, math.exp(myloss.data/len(sent))))
+    print(sent)
+    myloss = 0
