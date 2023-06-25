@@ -16,6 +16,9 @@ blank_index = 0
 
 model = GatedConv.load("pretrained/gated-conv.pth")
 model.eval()
+# Use CUDA
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+model.to(device)
 
 decoder = CTCBeamDecoder(
     model.vocabulary,
